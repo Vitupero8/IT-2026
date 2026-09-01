@@ -1,0 +1,192 @@
+.todays-diary {
+    border-radius: 20px;
+    padding: 24px;
+    color: white;
+}
+
+.diary-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.diary-section-header h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.diary-count {
+    border-radius: 999px;
+    background: #111827;
+    color: #cbd5e1;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.diary-header-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.empty-diary {
+    margin: 0;
+    color: #cbd5e1;
+    text-align: center;
+    padding: 34px 18px;
+    border-radius: 16px;
+    background: #111827;
+}
+
+.diary-meal {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 18px;
+    align-items: center;
+    background: #111827;
+    border: 1px solid rgba(148, 163, 184, .14);
+    border-radius: 16px;
+    padding: 18px;
+    margin-bottom: 14px;
+    transition: .2s;
+}
+
+.diary-meal:hover {
+    transform: translateY(-2px);
+    border-color: rgba(34, 197, 94, .36);
+    background: #172033;
+}
+
+.quick-meal-entry {
+    border-color: rgba(34, 197, 94, .34);
+}
+
+.recipe-meal-entry {
+    border-color: rgba(59, 130, 246, .34);
+}
+
+.meal-info {
+    min-width: 0;
+}
+
+.meal-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.meal-title-row h3 {
+    margin: 4px 0 0;
+    font-size: 20px;
+    line-height: 1.2;
+}
+
+.meal-title-row strong {
+    flex: 0 0 auto;
+    color: #22c55e;
+    font-size: 18px;
+}
+
+.meal-type {
+    color: #94a3b8;
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.meal-macros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.meal-macros span {
+    border-radius: 999px;
+    background: #334155;
+    color: #e2e8f0;
+    padding: 7px 10px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.meal-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.meal-items span,
+.meal-serving {
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+.meal-items span {
+    border-radius: 10px;
+    background: rgba(51, 65, 85, .55);
+    padding: 7px 9px;
+}
+
+.meal-serving {
+    margin: 12px 0 0;
+}
+
+.delete-meal-btn {
+    border: none;
+    background: #ef4444;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: .2s;
+}
+
+.delete-meal-btn:hover {
+    background: #dc2626;
+}
+
+@media (max-width: 640px) {
+    .todays-diary {
+        padding: 20px;
+    }
+
+    .diary-section-header,
+    .meal-title-row {
+        flex-direction: column;
+    }
+
+    .diary-meal {
+        grid-template-columns: 1fr;
+    }
+
+    .delete-meal-btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 420px) {
+    .todays-diary {
+        padding: 16px;
+        border-radius: 16px;
+    }
+
+    .diary-section-header h2 {
+        font-size: 21px;
+    }
+
+    .diary-meal {
+        padding: 14px;
+    }
+
+    .meal-title-row strong {
+        font-size: 16px;
+    }
+}

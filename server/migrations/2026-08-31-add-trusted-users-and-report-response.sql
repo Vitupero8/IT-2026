@@ -1,0 +1,6 @@
+ALTER TABLE Users
+    ADD COLUMN TrustedRecipeCreator TINYINT(1) NOT NULL DEFAULT 0;
+
+ALTER TABLE RecipeReports
+    ADD COLUMN AdminResponse VARCHAR(255) NULL,
+    ADD COLUMN ReviewedAt TIMESTAMP NULL;

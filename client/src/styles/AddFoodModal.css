@@ -1,0 +1,379 @@
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.modal {
+    width: min(460px, 100%);
+    max-height: calc(100svh - 24px);
+    overflow-y: auto;
+    border-radius: 18px;
+    background: #1e293b;
+    padding: 24px;
+    color: white;
+}
+
+.modal h2 {
+    margin: 0 0 16px;
+    overflow-wrap: anywhere;
+}
+
+.modal form {
+    display: grid;
+    gap: 12px;
+}
+
+.modal input {
+    width: 100%;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    background: #334155;
+    color: white;
+    padding: 13px;
+    outline: none;
+}
+
+.modal-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.modal-buttons button {
+    flex: 1 1 140px;
+    min-height: 44px;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-weight: 900;
+}
+
+.save-btn {
+    background: #22c55e;
+}
+
+.cancel-btn {
+    background: #334155;
+}
+
+.food-database {
+    width: 1100px;
+    max-width: 95%;
+    height: 700px;
+    background: #1e293b;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,.45);
+}
+
+.food-database-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 30px;
+    background: #0f172a;
+    border-bottom: 1px solid #334155;
+}
+
+.food-database-header h2 {
+    margin: 0;
+    color: white;
+}
+
+.close-button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.close-button:hover {
+    color: #ef4444;
+}
+
+.food-database-body {
+    flex: 1;
+    display: flex;
+}
+
+/* LEFT PANEL */
+
+.food-sidebar {
+    width: 340px;
+    background: #111827;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #334155;
+}
+
+.food-search {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background: #334155;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.food-search::placeholder {
+    color: #cbd5e1;
+}
+
+.food-list {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* FOOD CARD */
+
+.food-item {
+    background: #1e293b;
+    border-radius: 14px;
+    padding: 15px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: .25s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.food-item:hover {
+    transform: translateY(-2px);
+    background: #263549;
+}
+
+.food-item h3 {
+    margin: 0;
+    color: white;
+    font-size: 18px;
+}
+
+.food-item p {
+    margin: 6px 0 0;
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+.delete-food-btn {
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 42px;
+    height: 42px;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.delete-food-btn:hover {
+    background: #dc2626;
+}
+
+.add-food-button {
+    margin-top: 20px;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: #22c55e;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.add-food-button:hover {
+    background: #16a34a;
+}
+
+/* RIGHT PANEL */
+
+.food-content {
+    flex: 1;
+    padding: 35px;
+    overflow-y: auto;
+}
+
+.food-placeholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: #cbd5e1;
+    text-align: center;
+}
+
+.food-placeholder h2 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.food-details h2 {
+    margin-top: 0;
+    color: white;
+}
+
+.food-details p {
+    color: #cbd5e1;
+    font-size: 18px;
+    margin: 12px 0;
+}
+
+.edit-food-button {
+    margin-top: 30px;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 10px;
+    background: #3b82f6;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    transition: .25s;
+}
+
+.edit-food-button:hover {
+    background: #2563eb;
+}
+
+/* FORM */
+
+.food-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.food-form h2 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.food-form input {
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background: #334155;
+    color: white;
+    font-size: 15px;
+}
+
+.food-form input::placeholder {
+    color: #cbd5e1;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+}
+
+.save-food-button {
+    margin-top: 10px;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: #22c55e;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.save-food-button:hover {
+    background: #16a34a;
+}
+
+/* Scrollbar */
+
+.food-list::-webkit-scrollbar,
+.food-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.food-list::-webkit-scrollbar-thumb,
+.food-content::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 999px;
+}
+
+.food-list::-webkit-scrollbar-track,
+.food-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+@media (max-width: 760px) {
+    .food-database {
+        width: 100%;
+        max-width: calc(100% - 20px);
+        height: calc(100svh - 20px);
+        border-radius: 16px;
+    }
+
+    .food-database-body {
+        min-height: 0;
+        flex-direction: column;
+    }
+
+    .food-sidebar {
+        width: 100%;
+        max-height: 42svh;
+        border-right: none;
+        border-bottom: 1px solid #334155;
+    }
+
+    .food-content {
+        min-height: 0;
+        padding: 20px;
+    }
+
+    .food-database-header,
+    .food-sidebar {
+        padding: 16px;
+    }
+
+    .food-item {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .delete-food-btn,
+    .add-food-button,
+    .edit-food-button,
+    .save-food-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 420px) {
+    .food-database {
+        max-width: calc(100% - 12px);
+        height: calc(100svh - 12px);
+        border-radius: 14px;
+    }
+
+    .food-database-header,
+    .food-sidebar,
+    .food-content {
+        padding: 12px;
+    }
+}

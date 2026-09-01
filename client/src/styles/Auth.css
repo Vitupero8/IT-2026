@@ -1,0 +1,274 @@
+.login-container {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0F172A;
+    overflow-x: hidden;
+    padding: 20px;
+}
+
+.login-content {
+    width: 100%;
+    max-width: 1200px;
+    min-width: 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 40px 20px;
+}
+
+.login-left {
+    max-width: 500px;
+    color: white;
+}
+
+.hero-title {
+    font-size: 60px;
+    color: #22C55E;
+    margin-bottom: 10px;
+}
+
+.hero-subtitle {
+    color: #9CA3AF;
+    font-size: 20px;
+    margin-top: 20px;
+    line-height: 1.6;
+}
+
+.login-card {
+    width: min(420px, 100%);
+    min-width: 0;
+
+    background-color: #1E293B;
+
+    padding: 40px;
+
+    border-radius: 20px;
+
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.35);
+}
+
+.logo-circle {
+    width: 80px;
+    height: 80px;
+
+    background: #22C55E;
+
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 auto 20px;
+
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.logo {
+    color: #22C55E;
+    text-align: center;
+    margin-bottom: 10px;
+    overflow-wrap: anywhere;
+}
+
+.subtitle {
+    color: #9CA3AF;
+    text-align: center;
+    margin-bottom: 30px;
+    overflow-wrap: anywhere;
+}
+
+.input {
+    width: 100%;
+
+    padding: 14px;
+
+    margin-top: 15px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background-color: #374151;
+
+    color: white;
+
+    font-size: 16px;
+}
+
+.input:focus {
+    outline: none;
+
+    border: 2px solid #22C55E;
+
+    box-shadow: 0 0 8px rgba(34,197,94,0.35);
+
+    transition: .2s;
+}
+
+.login-button {
+    width: 100%;
+
+    margin-top: 20px;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background-color: #22C55E;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: all .2s ease;
+}
+
+.login-button:hover {
+    background-color: #16A34A;
+
+    transform: translateY(-2px);
+}
+
+.register-text {
+    margin-top: 20px;
+
+    text-align: center;
+
+    color: #9CA3AF;
+}
+
+.register-text a {
+    color: #22C55E;
+
+    text-decoration: none;
+
+    font-weight: bold;
+}
+
+.register-text a:hover {
+    text-decoration: underline;
+}
+
+.reset-password-link {
+    width: 100%;
+    margin-top: 10px;
+    border: 0;
+    background: transparent;
+    color: #22C55E;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.reset-password-link:hover {
+    text-decoration: underline;
+}
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(2, 6, 23, .78);
+    padding: 16px;
+}
+
+.reset-password-modal {
+    width: min(420px, 100%);
+    border: 1px solid rgba(148, 163, 184, .18);
+    border-radius: 18px;
+    background: #1E293B;
+    color: white;
+    padding: 26px;
+    box-shadow: 0 28px 80px rgba(0, 0, 0, .56);
+}
+
+.reset-password-modal h2 {
+    margin: 0 0 8px;
+    color: #22C55E;
+}
+
+.reset-password-modal p {
+    margin: 0 0 8px;
+    color: #9CA3AF;
+    line-height: 1.5;
+}
+
+.reset-password-actions {
+    display: grid;
+    gap: 10px;
+}
+
+.reset-password-cancel {
+    border: 1px solid #334155;
+    border-radius: 10px;
+    background: #111827;
+    color: white;
+    padding: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+
+    .login-content {
+
+        flex-direction: column;
+
+        justify-content: center;
+    }
+
+    .login-left {
+
+        display: none;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .login-container {
+        align-items: flex-start;
+        padding: 16px;
+    }
+
+    .login-content {
+        padding: 0;
+    }
+
+    .login-card {
+        padding: 28px 20px;
+        border-radius: 18px;
+    }
+
+    .input,
+    .login-button {
+        min-height: 48px;
+    }
+
+    .logo-circle {
+        width: 68px;
+        height: 68px;
+        font-size: 28px;
+    }
+
+    .logo {
+        font-size: 28px;
+    }
+
+}

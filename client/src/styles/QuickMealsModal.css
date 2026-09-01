@@ -1,0 +1,535 @@
+.quick-meals-modal {
+    width: 1100px;
+    max-width: 95%;
+    height: min(720px, 92vh);
+    max-height: calc(100svh - 24px);
+    background: #1e293b;
+    border: 1px solid rgba(148, 163, 184, .18);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 28px 80px rgba(0,0,0,.56);
+    color: white;
+}
+
+.quick-meals-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 28px;
+    background: #0f172a;
+    border-bottom: 1px solid #334155;
+    min-width: 0;
+}
+
+.quick-meals-header h2 {
+    margin: 0;
+    color: white;
+}
+
+.quick-title-lockup,
+.quick-details-hero {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+}
+
+.quick-title-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    background: rgba(34, 197, 94, .16);
+    color: #22c55e;
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+}
+
+.quick-meals-body {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+}
+
+.quick-meals-sidebar {
+    width: 360px;
+    min-width: 0;
+    background: #111827;
+    border-right: 1px solid #334155;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    overflow: hidden;
+}
+
+.quick-meals-list {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.quick-meal-card {
+    min-width: 0;
+    background: #1e293b;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.quick-meal-card:hover {
+    background: #293548;
+    transform: translateY(-2px);
+}
+
+.quick-meal-card h3 {
+    margin: 0 0 8px;
+    color: white;
+    overflow-wrap: anywhere;
+}
+
+.quick-meal-card p {
+    margin: 4px 0;
+    color: #cbd5e1;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+.quick-card-actions,
+.quick-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+    min-width: 0;
+}
+
+.quick-card-actions button,
+.quick-secondary-button {
+    border: none;
+    border-radius: 10px;
+    background: #3b82f6;
+    color: white;
+    padding: 10px 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.quick-card-actions button:hover,
+.quick-secondary-button:hover {
+    background: #2563eb;
+}
+
+.quick-card-actions .quick-danger-button,
+.quick-danger-button {
+    background: #ef4444;
+}
+
+.quick-card-actions .quick-danger-button:hover,
+.quick-danger-button:hover {
+    background: #dc2626;
+}
+
+.quick-primary-button {
+    border: none;
+    border-radius: 12px;
+    background: #22c55e;
+    color: white;
+    padding: 14px 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.quick-primary-button:hover {
+    background: #16a34a;
+}
+
+.quick-primary-button:disabled {
+    opacity: .65;
+    cursor: not-allowed;
+}
+
+.quick-meals-content {
+    flex: 1;
+    min-width: 0;
+    padding: 35px;
+    overflow-y: auto;
+}
+
+.quick-placeholder {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    color: #cbd5e1;
+}
+
+.quick-placeholder h2,
+.quick-details h2,
+.quick-form h2 {
+    margin-top: 0;
+    color: white;
+    overflow-wrap: anywhere;
+}
+
+.quick-details,
+.quick-form {
+    min-width: 0;
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.quick-details-hero {
+    align-items: flex-start;
+    border-radius: 18px;
+    background:
+        linear-gradient(135deg, rgba(34, 197, 94, .14), rgba(17, 24, 39, .92)),
+        #111827;
+    border: 1px solid rgba(148, 163, 184, .14);
+    padding: 22px;
+}
+
+.quick-details-hero h2 {
+    margin: 0;
+}
+
+.quick-details-hero p {
+    margin: 8px 0 0;
+    color: #cbd5e1;
+    overflow-wrap: anywhere;
+}
+
+.quick-macro-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin: 22px 0;
+}
+
+.quick-macro-grid span {
+    min-width: 0;
+    background: #334155;
+    border-radius: 12px;
+    padding: 14px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.quick-nutrition-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin: 22px 0;
+}
+
+.quick-nutrition-grid article {
+    min-width: 0;
+    border: 1px solid rgba(148, 163, 184, .14);
+    border-radius: 16px;
+    background: #111827;
+    padding: 16px;
+    display: grid;
+    gap: 7px;
+    overflow-wrap: anywhere;
+}
+
+.quick-nutrition-grid svg {
+    color: #22c55e;
+}
+
+.quick-nutrition-grid span {
+    color: #94a3b8;
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.quick-nutrition-grid strong {
+    color: white;
+    font-size: 23px;
+    line-height: 1.1;
+}
+
+.quick-nutrition-grid small {
+    color: #cbd5e1;
+}
+
+.quick-card-macros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.quick-card-macros span {
+    max-width: 100%;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, .72);
+    color: #cbd5e1;
+    padding: 5px 9px;
+    font-size: 12px;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+.quick-items,
+.quick-form-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.quick-item-row {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 12px;
+    align-items: center;
+    background: #334155;
+    border-radius: 12px;
+    padding: 14px;
+    color: #cbd5e1;
+}
+
+.quick-item-row strong {
+    color: white;
+    overflow-wrap: anywhere;
+}
+
+.quick-item-row button {
+    border: none;
+    border-radius: 8px;
+    background: #ef4444;
+    color: white;
+    padding: 8px 10px;
+    cursor: pointer;
+}
+
+.quick-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.quick-form input,
+.quick-form select {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    background: #334155;
+    color: white;
+    font-size: 15px;
+}
+
+.quick-form input::placeholder {
+    color: #cbd5e1;
+}
+
+.quick-mode-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.quick-mode-tabs button {
+    border: 1px solid #334155;
+    border-radius: 12px;
+    background: #111827;
+    color: #cbd5e1;
+    padding: 12px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.quick-mode-tabs button.active {
+    border-color: #22c55e;
+    background: rgba(34, 197, 94, .16);
+    color: white;
+}
+
+.quick-add-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(110px, .6fr) auto;
+    gap: 12px;
+    min-width: 0;
+}
+
+.quick-add-item.manual {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.quick-add-item.manual button {
+    grid-column: 1 / -1;
+    padding: 14px;
+}
+
+.quick-add-item button {
+    border: none;
+    border-radius: 10px;
+    background: #22c55e;
+    color: white;
+    padding: 0 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.quick-add-item button:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+.quick-empty {
+    color: #cbd5e1;
+    text-align: center;
+    padding: 20px;
+}
+
+@media (max-width: 760px) {
+    .quick-meals-modal {
+        width: 100%;
+        max-width: calc(100% - 24px);
+        height: calc(100svh - 24px);
+        max-height: calc(100svh - 24px);
+    }
+
+    .quick-meals-body {
+        flex: 1 1 auto;
+        min-height: 0;
+        display: block;
+        overflow-y: auto;
+    }
+
+    .quick-meals-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #334155;
+        overflow: visible;
+    }
+
+    .quick-meals-list {
+        flex: none;
+        max-height: 34svh;
+        min-height: 140px;
+    }
+
+    .quick-meals-content {
+        padding: 22px;
+        overflow: visible;
+    }
+
+    .quick-macro-grid,
+    .quick-nutrition-grid,
+    .quick-add-item {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .quick-add-item button {
+        grid-column: 1 / -1;
+        padding: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .quick-meals-modal {
+        max-width: calc(100% - 12px);
+        height: calc(100svh - 12px);
+        max-height: calc(100svh - 12px);
+        border-radius: 14px;
+    }
+
+    .quick-meals-header {
+        align-items: flex-start;
+        gap: 12px;
+        padding: 14px;
+    }
+
+    .quick-title-lockup {
+        min-width: 0;
+        gap: 12px;
+    }
+
+    .quick-title-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+    }
+
+    .quick-meals-header h2 {
+        font-size: 20px;
+        overflow-wrap: anywhere;
+    }
+
+    .quick-meals-sidebar,
+    .quick-meals-content {
+        padding: 14px;
+    }
+
+    .quick-macro-grid,
+    .quick-nutrition-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-details-hero {
+        flex-direction: column;
+    }
+
+    .quick-item-row {
+        grid-template-columns: 1fr auto;
+    }
+
+    .quick-add-item {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-card-actions button,
+    .quick-actions button {
+        flex: 1 1 100%;
+    }
+}
+
+@media (max-width: 760px) {
+    .quick-meals-modal {
+        height: calc(100svh - 24px);
+        max-height: calc(100svh - 24px);
+    }
+
+    .quick-meals-sidebar {
+        max-height: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .quick-meals-modal {
+        height: calc(100svh - 12px);
+        max-height: calc(100svh - 12px);
+    }
+
+    .quick-meals-list {
+        max-height: 34svh;
+        min-height: 150px;
+    }
+}
