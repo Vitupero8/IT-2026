@@ -71,6 +71,13 @@ function MacroCalculatorModal({
         activityLevel: "moderate",
         fitnessGoal: "maintain"
     });
+    const [useManualTargets, setUseManualTargets] = useState(false);
+    const [manualTargets, setManualTargets] = useState({
+        targetCalories: "",
+        targetProtein: "",
+        targetCarbs: "",
+        targetFat: ""
+    });
     const [saving, setSaving] = useState(false);
 
     useEffect(() => {
@@ -84,6 +91,14 @@ function MacroCalculatorModal({
             activityLevel: user.ActivityLevel || "moderate",
             fitnessGoal: user.FitnessGoal || "maintain"
         });
+
+        setManualTargets({
+            targetCalories: user.TargetCalories || "",
+            targetProtein: user.TargetProtein || "",
+            targetCarbs: user.TargetCarbs || "",
+            targetFat: user.TargetFat || ""
+        });
+        setUseManualTargets(false);
     }, [isOpen, user]);
 
     const calculations = useMemo(() => {
@@ -129,6 +144,41 @@ function MacroCalculatorModal({
         return "Obesity range";
     }, [calculations]);
 
+    const selectedTargets = useMemo(() => {
+        if (!calculations) return null;
+
+        if (!useManualTargets) return calculations;
+
+        const targetCalories = Number(manualTargets.targetCalories);
+        const targetProtein = Number(manualTargets.targetProtein);
+        const targetCarbs = Number(manualTargets.targetCarbs);
+        const targetFat = Number(manualTargets.targetFat);
+        const hasMissingTarget = Object.values(manualTargets).some(value => value === "");
+
+        if (
+            hasMissingTarget
+            || !targetCalories
+            || targetCalories < 800
+            || targetProtein < 0
+            || targetCarbs < 0
+            || targetFat < 0
+            || Number.isNaN(targetProtein)
+            || Number.isNaN(targetCarbs)
+            || Number.isNaN(targetFat)
+        ) {
+            return null;
+        }
+
+        return {
+            ...calculations,
+            targetCalories: Math.round(targetCalories),
+            targetProtein: Math.round(targetProtein),
+            targetCarbs: Math.round(targetCarbs),
+            targetFat: Math.round(targetFat)
+        };
+    }, [calculations, manualTargets, useManualTargets]);
+    const displayedTargets = selectedTargets || (!useManualTargets ? calculations : null);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
 
@@ -138,9 +188,23 @@ function MacroCalculatorModal({
         }));
     };
 
+    const handleManualTargetChange = (e) => {
+        const { name, value } = e.target;
+
+        setManualTargets(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
     const saveTargets = async () => {
         if (!calculations) {
             toast.error("Fill in the calculator fields first.");
+            return;
+        }
+
+        if (!selectedTargets) {
+            toast.error("Enter valid custom macro targets first.");
             return;
         }
 
@@ -154,10 +218,10 @@ function MacroCalculatorModal({
                 currentWeight: Number(form.currentWeight),
                 activityLevel: form.activityLevel,
                 fitnessGoal: form.fitnessGoal,
-                targetCalories: calculations.targetCalories,
-                targetProtein: calculations.targetProtein,
-                targetCarbs: calculations.targetCarbs,
-                targetFat: calculations.targetFat,
+                targetCalories: selectedTargets.targetCalories,
+                targetProtein: selectedTargets.targetProtein,
+                targetCarbs: selectedTargets.targetCarbs,
+                targetFat: selectedTargets.targetFat,
                 bmi: calculations.bmi,
                 bmr: calculations.bmr,
                 tdee: calculations.tdee
@@ -174,10 +238,10 @@ function MacroCalculatorModal({
                     Bmi: calculations.bmi,
                     Bmr: calculations.bmr,
                     Tdee: calculations.tdee,
-                    TargetCalories: calculations.targetCalories,
-                    TargetProtein: calculations.targetProtein,
-                    TargetCarbs: calculations.targetCarbs,
-                    TargetFat: calculations.targetFat
+                    TargetCalories: selectedTargets.targetCalories,
+                    TargetProtein: selectedTargets.targetProtein,
+                    TargetCarbs: selectedTargets.targetCarbs,
+                    TargetFat: selectedTargets.targetFat
                 },
                 targets: response.data.targets
             });
@@ -320,13 +384,74 @@ function MacroCalculatorModal({
                                 }
                             </div>
                         </div>
+
+                        <div className="manual-target-panel">
+                            <label className="manual-target-toggle">
+                                <input
+                                    type="checkbox"
+                                    checked={useManualTargets}
+                                    onChange={(e) => setUseManualTargets(e.target.checked)}
+                                />
+                                <span>Enter my own targets</span>
+                            </label>
+
+                            {
+                                useManualTargets && (
+                                    <div className="calculator-input-grid manual-target-grid">
+                                        <label>
+                                            Calories
+                                            <input
+                                                name="targetCalories"
+                                                type="number"
+                                                min="800"
+                                                value={manualTargets.targetCalories}
+                                                onChange={handleManualTargetChange}
+                                            />
+                                        </label>
+
+                                        <label>
+                                            Protein
+                                            <input
+                                                name="targetProtein"
+                                                type="number"
+                                                min="0"
+                                                value={manualTargets.targetProtein}
+                                                onChange={handleManualTargetChange}
+                                            />
+                                        </label>
+
+                                        <label>
+                                            Carbs
+                                            <input
+                                                name="targetCarbs"
+                                                type="number"
+                                                min="0"
+                                                value={manualTargets.targetCarbs}
+                                                onChange={handleManualTargetChange}
+                                            />
+                                        </label>
+
+                                        <label>
+                                            Fat
+                                            <input
+                                                name="targetFat"
+                                                type="number"
+                                                min="0"
+                                                value={manualTargets.targetFat}
+                                                onChange={handleManualTargetChange}
+                                            />
+                                        </label>
+                                    </div>
+                                )
+                            }
+                        </div>
                     </form>
 
                     <section className="calculator-results">
                         <div className="result-card highlight">
                             <Calculator size={22} />
                             <span>Target calories</span>
-                            <strong>{calculations?.targetCalories || "--"} kcal</strong>
+                            <strong>{displayedTargets?.targetCalories || "--"} kcal</strong>
                         </div>
 
                         <div className="result-grid">
@@ -353,9 +478,9 @@ function MacroCalculatorModal({
                         </div>
 
                         <div className="macro-result-strip">
-                            <span>Protein <strong>{calculations?.targetProtein || "--"}g</strong></span>
-                            <span>Carbs <strong>{calculations?.targetCarbs || "--"}g</strong></span>
-                            <span>Fat <strong>{calculations?.targetFat || "--"}g</strong></span>
+                            <span>Protein <strong>{displayedTargets?.targetProtein ?? "--"}g</strong></span>
+                            <span>Carbs <strong>{displayedTargets?.targetCarbs ?? "--"}g</strong></span>
+                            <span>Fat <strong>{displayedTargets?.targetFat ?? "--"}g</strong></span>
                         </div>
 
                         <button

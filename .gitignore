@@ -15,6 +15,7 @@ client/.env
 
 # Local uploads and runtime files
 server/uploads/
+tmp/
 
 # Logs
 *.log
