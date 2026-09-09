@@ -104,6 +104,19 @@ function WorkoutSplits() {
         }));
     };
 
+    const handleSplitSaved = useCallback((result) => {
+        if (result?.status && result.status !== "Approved") {
+            setFilters(prev => ({
+                ...prev,
+                owner: "mine",
+                sort: "newest"
+            }));
+            return;
+        }
+
+        loadSplits();
+    }, [loadSplits]);
+
     useEffect(() => {
         loadSplits();
     }, [loadSplits]);
@@ -208,19 +221,32 @@ function WorkoutSplits() {
                             </select>
                         </label>
 
-                        <label>
-                            View
-                            <select
-                                value={filters.owner}
-                                onChange={(e) => setFilters(prev => ({
-                                    ...prev,
-                                    owner: e.target.value
-                                }))}
-                            >
-                                <option value="all">Public</option>
-                                <option value="mine">Mine</option>
-                            </select>
-                        </label>
+                        <div className="workout-owner-tabs">
+                            <span>View</span>
+                            <div>
+                                <button
+                                    type="button"
+                                    className={filters.owner === "all" ? "active" : ""}
+                                    onClick={() => setFilters(prev => ({
+                                        ...prev,
+                                        owner: "all"
+                                    }))}
+                                >
+                                    Public
+                                </button>
+
+                                <button
+                                    type="button"
+                                    className={filters.owner === "mine" ? "active" : ""}
+                                    onClick={() => setFilters(prev => ({
+                                        ...prev,
+                                        owner: "mine"
+                                    }))}
+                                >
+                                    Mine
+                                </button>
+                            </div>
+                        </div>
 
                         <label>
                             Goal
@@ -356,7 +382,7 @@ function WorkoutSplits() {
             <CreateWorkoutSplitModal
                 isOpen={showCreate}
                 onClose={() => setShowCreate(false)}
-                onCreated={loadSplits}
+                onCreated={handleSplitSaved}
             />
 
             <CreateWorkoutSplitModal
@@ -365,7 +391,7 @@ function WorkoutSplits() {
                 editSplit={editingSplit?.split}
                 editDays={editingSplit?.days || []}
                 editExercises={editingSplit?.exercises || []}
-                onCreated={loadSplits}
+                onCreated={handleSplitSaved}
             />
 
             <WorkoutSplitDetailModal

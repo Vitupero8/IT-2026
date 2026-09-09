@@ -514,7 +514,7 @@ body {
 
 .active-workout-exercises > div {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 110px 42px;
+    grid-template-columns: minmax(0, 1fr) 42px;
     gap: 12px;
     align-items: end;
     border-radius: 12px;
@@ -524,12 +524,8 @@ body {
 
 .active-workout-exercise-fields {
     display: grid;
-    grid-template-columns: minmax(0, 1.2fr) 110px;
+    grid-template-columns: minmax(0, 1fr) 140px;
     gap: 10px;
-}
-
-.active-workout-exercise-fields .wide {
-    grid-column: 1 / -1;
 }
 
 .active-workout-rest {

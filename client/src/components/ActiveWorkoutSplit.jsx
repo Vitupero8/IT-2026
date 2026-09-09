@@ -162,7 +162,7 @@ function ActiveWorkoutSplit() {
                                                         />
                                                     </label>
 
-                                                    <label className="wide">
+                                                    <label>
                                                         Notes
                                                         <input
                                                             value={exercise.DisplayNotes ?? exercise.Notes ?? ""}
@@ -171,19 +171,19 @@ function ActiveWorkoutSplit() {
                                                             placeholder="Reps, form notes, tempo, or target effort"
                                                         />
                                                     </label>
-                                                </div>
 
-                                                <label>
-                                                    Kg
-                                                    <input
-                                                        type="number"
-                                                        min="0"
-                                                        step="0.5"
-                                                        value={exercise.WeightKg}
-                                                        onChange={(e) => updateExerciseLocal(exercise.Id, "WeightKg", e.target.value)}
-                                                        onBlur={() => saveExercise(exercise.Id)}
-                                                    />
-                                                </label>
+                                                    <label>
+                                                        Kg
+                                                        <input
+                                                            type="number"
+                                                            min="0"
+                                                            step="0.5"
+                                                            value={exercise.WeightKg}
+                                                            onChange={(e) => updateExerciseLocal(exercise.Id, "WeightKg", e.target.value)}
+                                                            onBlur={() => saveExercise(exercise.Id)}
+                                                        />
+                                                    </label>
+                                                </div>
 
                                                 <button
                                                     type="button"

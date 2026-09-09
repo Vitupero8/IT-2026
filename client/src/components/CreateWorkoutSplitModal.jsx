@@ -190,8 +190,12 @@ function CreateWorkoutSplitModal({
                 ? await api.put(`/workout-splits/${editSplit.Id}`, payload)
                 : await api.post("/workout-splits", payload);
 
-            toast.success(response.data?.message || (isEditing ? "Workout split updated." : "Workout split posted."));
-            onCreated?.();
+            const successMessage = response.data?.status && response.data.status !== "Approved"
+                ? `${response.data?.message || "Workout split saved."} You can use it from Mine while it waits for review.`
+                : response.data?.message || (isEditing ? "Workout split updated." : "Workout split posted.");
+
+            toast.success(successMessage);
+            onCreated?.(response.data);
             close();
         }
         catch (err) {
