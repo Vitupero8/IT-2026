@@ -51,6 +51,7 @@ function QuickMealsModal({
         message: "",
         type: "success"
     });
+    const [deletePrompt, setDeletePrompt] = useState(null);
 
     const showToast = (message, type = "success") => {
         setToast({
@@ -382,10 +383,9 @@ function QuickMealsModal({
         }
     };
 
-    const deleteQuickMeal = async (meal) => {
-        if (!window.confirm(`Delete ${meal.Name}?`)) return;
-
+    const performDeleteQuickMeal = async (meal) => {
         try {
+            setDeletePrompt(null);
             await api.delete(`/quick-meals/${meal.Id}`);
             showToast("Quick meal deleted.");
 
@@ -402,6 +402,14 @@ function QuickMealsModal({
                 "error"
             );
         }
+    };
+
+    const deleteQuickMeal = (meal) => {
+        setDeletePrompt({
+            meal,
+            title: `Delete ${meal.Name}?`,
+            message: "This will remove the saved quick meal from your account."
+        });
     };
 
     const addQuickMealToDiary = async (meal) => {
@@ -833,6 +841,33 @@ function QuickMealsModal({
                 type={toast.type}
                 onClose={hideToast}
             />
+
+            {
+                deletePrompt && (
+                    <div className="toast-confirm danger">
+                        <div>
+                            <strong>{deletePrompt.title}</strong>
+                            <span>{deletePrompt.message}</span>
+                        </div>
+
+                        <div className="toast-confirm-actions">
+                            <button
+                                type="button"
+                                onClick={() => setDeletePrompt(null)}
+                            >
+                                Cancel
+                            </button>
+
+                            <button
+                                type="button"
+                                onClick={() => performDeleteQuickMeal(deletePrompt.meal)}
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                )
+            }
         </div>
     );
 }

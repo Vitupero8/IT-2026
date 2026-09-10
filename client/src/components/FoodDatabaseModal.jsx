@@ -51,6 +51,7 @@ function FoodDatabaseModal({
         message: "",
         type: "success"
     });
+    const [deletePrompt, setDeletePrompt] = useState(null);
 
     const showToast = (message, type = "success") => {
         setToast({
@@ -216,53 +217,42 @@ function FoodDatabaseModal({
         }
     };
 
-    const deleteFood = async (id) => {
-        if (!window.confirm("Delete this food?")) return;
-
+    const performDeleteFood = async (id, confirmDiaryDelete = false) => {
         try {
-            await api.delete(`/foods/${id}`);
+            setDeletePrompt(null);
+            await api.delete(`/foods/${id}`, {
+                params: confirmDiaryDelete
+                    ? {
+                        confirmDiaryDelete: true
+                    }
+                    : {}
+            });
 
-            showToast("Food deleted successfully.");
+            showToast(
+                confirmDiaryDelete
+                    ? "Food deleted and removed from today's diary."
+                    : "Food deleted successfully."
+            );
 
             if (selectedFood?.Id === id) {
                 resetForm();
             }
 
             await loadFoods();
+            if (confirmDiaryDelete) onMealAdded?.();
         }
         catch (err) {
             console.error(err);
 
             if (err.response?.status === 409 && err.response.data?.requiresConfirmation) {
-                const confirmed = window.confirm(err.response.data.message);
+                const food = foods.find(item => item.Id === id) || selectedFood;
 
-                if (!confirmed) return;
-
-                try {
-                    await api.delete(`/foods/${id}`, {
-                        params: {
-                            confirmDiaryDelete: true
-                        }
-                    });
-
-                    showToast("Food deleted and removed from today's diary.");
-
-                    if (selectedFood?.Id === id) {
-                        resetForm();
-                    }
-
-                    await loadFoods();
-                    onMealAdded?.();
-                }
-                catch (confirmErr) {
-                    console.error(confirmErr);
-
-                    showToast(
-                        confirmErr.response?.data?.message ||
-                        "Failed to delete food.",
-                        "error"
-                    );
-                }
+                setDeletePrompt({
+                    id,
+                    title: `Delete ${food?.Name || "food"}?`,
+                    message: err.response.data.message,
+                    confirmDiaryDelete: true
+                });
             }
             else {
                 showToast(
@@ -272,6 +262,17 @@ function FoodDatabaseModal({
                 );
             }
         }
+    };
+
+    const deleteFood = (id) => {
+        const food = foods.find(item => item.Id === id) || selectedFood;
+
+        setDeletePrompt({
+            id,
+            title: `Delete ${food?.Name || "food"}?`,
+            message: "This will remove the food from your saved database.",
+            confirmDiaryDelete: false
+        });
     };
 
     const copyFood = async (id) => {
@@ -676,6 +677,33 @@ function FoodDatabaseModal({
                 type={toast.type}
                 onClose={hideToast}
             />
+
+            {
+                deletePrompt && (
+                    <div className="toast-confirm danger">
+                        <div>
+                            <strong>{deletePrompt.title}</strong>
+                            <span>{deletePrompt.message}</span>
+                        </div>
+
+                        <div className="toast-confirm-actions">
+                            <button
+                                type="button"
+                                onClick={() => setDeletePrompt(null)}
+                            >
+                                Cancel
+                            </button>
+
+                            <button
+                                type="button"
+                                onClick={() => performDeleteFood(deletePrompt.id, deletePrompt.confirmDiaryDelete)}
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                )
+            }
 
             <AddToDiaryModal
                 isOpen={isDiaryModalOpen}
